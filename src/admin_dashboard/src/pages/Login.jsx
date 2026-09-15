@@ -186,10 +186,11 @@ const Login = ({ onLoginSuccess }) => {
       <div className="card login-card">
         <div className="login-logo">
           <img
-            src="https://res.cloudinary.com/usn1yap2/image/upload/v1787230546/pod_assets/logo.png"
-            alt="Print My Way"
+            src="/logo-transparent.png"
+            alt="Gift Nest SHOP"
+            style={{ maxWidth: "200px", height: "auto", objectFit: "contain" }}
           />
-          <span style={{ fontSize: "13px", fontWeight: "600", color: "var(--text-muted)", letterSpacing: "1px", textTransform: "uppercase" }}>Admin Dashboard</span>
+          <span style={{ fontSize: "12px", fontWeight: "700", color: "var(--primary)", letterSpacing: "1.5px", textTransform: "uppercase", fontFamily: "var(--font-title)" }}>Admin Management Portal</span>
         </div>
 
         {error && (

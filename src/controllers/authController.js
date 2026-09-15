@@ -460,11 +460,11 @@ export const resendVerificationOTP = async (req, res, next) => {
         .json({ success: false, message: "Email address is required" });
     }
 
-    const user = await User.findOne({ email: { $regex: new RegExp("^" + normalizedEmail + "$", "i") }, role: "admin" });
+    const user = await User.findOne({ email: { $regex: new RegExp("^" + normalizedEmail + "$", "i") } });
     if (!user) {
       return res.status(404).json({
         success: false,
-        message: "Invalid email. No admin account found with this email.",
+        message: "Invalid email. No account found with this email.",
       });
     }
 
@@ -479,11 +479,11 @@ export const resendVerificationOTP = async (req, res, next) => {
     user.otpExpires = Date.now() + 24 * 60 * 60 * 1000; // 24 hours
     await user.save();
 
-    const emailHtml = getWelcomeEmailTemplate(user.name || "Admin", otp);
+    const emailHtml = getWelcomeEmailTemplate(user.name || "User", otp);
     await sendEmail({
       to: user.email,
-      subject: "Verify Your Print My Way Admin Dashboard Access",
-      text: `Please verify your email to continue using the Print My Way admin dashboard. Your verification code is: ${otp}`,
+      subject: "Verify Your Print My Way Account Email",
+      text: `Please verify your email to continue. Your verification code is: ${otp}`,
       html: emailHtml,
     });
 
@@ -500,7 +500,7 @@ export const resendVerificationOTP = async (req, res, next) => {
       .status(200)
       .json({
         success: true,
-        message: "Verification OTP has been resent to your email.",
+        message: `Verification OTP has been resent to ${user.email}.`
       });
   } catch (error) {
     next(error);

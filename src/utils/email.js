@@ -49,6 +49,8 @@ export const sendEmail = async ({ to, subject, text, html, fromType }) => {
     return { success: true, message: "Mock email logged successfully" };
   }
 
+  pass = pass ? pass.replace(/"/g, '').trim() : '';
+
   try {
     const transporter = nodemailer.createTransport({
       host,

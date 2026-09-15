@@ -13,7 +13,7 @@ export const getCategories = async (req, res, next) => {
 // Create a category
 export const createCategory = async (req, res, next) => {
   try {
-    const { name, parentCategory, isActive, image, description } = req.body;
+    const { name, parentCategory, isActive, image, description, emoji, badge, link } = req.body;
 
     // Process image URL from Cloudinary upload if present
     let imageUrl = image || '';
@@ -29,7 +29,10 @@ export const createCategory = async (req, res, next) => {
       parentCategory: parent,
       isActive: isActive !== undefined ? isActive : true,
       image: imageUrl,
-      description: description || ''
+      description: description || '',
+      emoji: emoji || '',
+      badge: badge || '',
+      link: link || ''
     });
 
     res.status(201).json({ success: true, data: category });
@@ -42,7 +45,7 @@ export const createCategory = async (req, res, next) => {
 export const updateCategory = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { name, parentCategory, isActive, image, description } = req.body;
+    const { name, parentCategory, isActive, image, description, emoji, badge, link } = req.body;
 
     // Process image URL from Cloudinary upload if present
     let imageUrl = image;
@@ -65,6 +68,9 @@ export const updateCategory = async (req, res, next) => {
     if (isActive !== undefined) category.isActive = isActive;
     if (imageUrl !== undefined) category.image = imageUrl;
     if (description !== undefined) category.description = description;
+    if (emoji !== undefined) category.emoji = emoji;
+    if (badge !== undefined) category.badge = badge;
+    if (link !== undefined) category.link = link;
 
     await category.save();
     res.status(200).json({ success: true, data: category });

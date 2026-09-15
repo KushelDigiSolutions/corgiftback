@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="favBow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EA869B" />
+      <stop offset="100%" stop-color="#D4536E" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="#FFFBF5" stroke="#E8DEC8" stroke-width="2"/>
+  <!-- Bow loops -->
+  <path d="M 32 26 C 20 10 4 13 8 25 C 12 34 26 30 32 26 Z" fill="url(#favBow)" />
+  <path d="M 32 26 C 44 10 60 13 56 25 C 52 34 38 30 32 26 Z" fill="url(#favBow)" />
+  <circle cx="32" cy="26" r="3" fill="#C53F59" />
+  <!-- Flourish -->
+  <path d="M 12 32 Q 32 22 52 32" stroke="url(#favBow)" stroke-width="1.2" fill="none" stroke-linecap="round" />
+  <text x="32" y="52" text-anchor="middle" font-family="Georgia, serif" font-size="13" font-weight="bold" fill="#221F1F" letter-spacing="-0.5">GN</text>
+</svg>

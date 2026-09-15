@@ -30,11 +30,11 @@ const Sidebar = ({ currentTab, onTabChange, adminUser, onLogout }) => {
     <div className="sidebar">
       <div className="sidebar-logo">
         <img
-          src="https://res.cloudinary.com/usn1yap2/image/upload/v1787230546/pod_assets/logo.png"
-          alt="Print My Way"
+          src="/logo-transparent.png"
+          alt="Gift Nest SHOP"
           style={{
             width: "100%",
-            maxWidth: "160px",
+            maxWidth: "170px",
             height: "auto",
             objectFit: "contain",
             display: "block",

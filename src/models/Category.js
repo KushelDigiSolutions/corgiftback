@@ -6,7 +6,10 @@ const categorySchema = new mongoose.Schema({
   parentCategory: { type: mongoose.Schema.Types.ObjectId, ref: 'Category', default: null },
   isActive: { type: Boolean, default: true },
   image: { type: String, default: '' },
-  description: { type: String, default: '' }
+  description: { type: String, default: '' },
+  emoji: { type: String, default: '' },
+  badge: { type: String, default: '' },
+  link: { type: String, default: '' }
 }, { timestamps: true });
 
 // Pre-validate or pre-save slug auto-creation
