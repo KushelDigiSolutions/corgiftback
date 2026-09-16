@@ -186,8 +186,8 @@ const Login = ({ onLoginSuccess }) => {
       <div className="card login-card">
         <div className="login-logo">
           <img
-            src="/logo-transparent.png"
-            alt="Gift Nest SHOP"
+            src="/logo.svg"
+            alt="Corporate GIFTY"
             style={{ maxWidth: "200px", height: "auto", objectFit: "contain" }}
           />
           <span style={{ fontSize: "12px", fontWeight: "700", color: "var(--primary)", letterSpacing: "1.5px", textTransform: "uppercase", fontFamily: "var(--font-title)" }}>Admin Management Portal</span>

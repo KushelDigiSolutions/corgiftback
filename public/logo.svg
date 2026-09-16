@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 140" fill="none">
+  <defs>
+    <linearGradient id="bowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EA869B" />
+      <stop offset="50%" stop-color="#DF6B83" />
+      <stop offset="100%" stop-color="#D4536E" />
+    </linearGradient>
+  </defs>
+
+  <!-- Left Bow Loop -->
+  <path d="M 160 38 C 135 10 90 12 92 28 C 94 42 128 44 160 38 Z" fill="url(#bowGradient)" opacity="0.92" />
+  
+  <!-- Right Bow Loop -->
+  <path d="M 160 38 C 185 10 230 12 228 28 C 226 42 192 44 160 38 Z" fill="url(#bowGradient)" opacity="0.92" />
+
+  <!-- Center Bow Knot -->
+  <ellipse cx="160" cy="38" rx="4.5" ry="3.8" fill="#C53F59" />
+
+  <!-- Top Ribbon Curve Flourish -->
+  <path d="M 50 48 Q 160 22 270 48" stroke="url(#bowGradient)" stroke-width="1.8" fill="none" stroke-linecap="round" opacity="0.8" />
+
+  <!-- Main Title: Corporate -->
+  <text x="160" y="88" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="40" font-weight="500" fill="#221F1F" letter-spacing="-0.5">Corporate</text>
+
+  <!-- Subtitle Flanking Lines & Text -->
+  <line x1="82" y1="112" x2="118" y2="112" stroke="#DF6B83" stroke-width="1.4" stroke-linecap="round" />
+  <text x="160" y="116" text-anchor="middle" font-family="'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="600" fill="#DF6B83" letter-spacing="5">GIFTY</text>
+  <line x1="202" y1="112" x2="238" y2="112" stroke="#DF6B83" stroke-width="1.4" stroke-linecap="round" />
+</svg>

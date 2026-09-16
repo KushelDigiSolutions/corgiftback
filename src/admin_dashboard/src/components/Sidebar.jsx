@@ -30,8 +30,8 @@ const Sidebar = ({ currentTab, onTabChange, adminUser, onLogout }) => {
     <div className="sidebar">
       <div className="sidebar-logo">
         <img
-          src="/logo-transparent.png"
-          alt="Gift Nest SHOP"
+          src="/logo.svg"
+          alt="Corporate GIFTY"
           style={{
             width: "100%",
             maxWidth: "170px",
