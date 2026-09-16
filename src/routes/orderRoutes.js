@@ -7,6 +7,7 @@ import {
   shipOrder,
   trackOrder,
   cancelOrder,
+  deletePendingOrder,
   delhiveryWebhook
 } from '../controllers/orderController.js';
 import { protect, adminOnly } from '../middleware/authMiddleware.js';
@@ -31,5 +32,6 @@ router.put('/:id/status', adminOnly, updateOrderStatus);
 router.post('/:id/ship', adminOnly, shipOrder);
 router.get('/:id/track', trackOrder);
 router.post('/:id/cancel', cancelOrder);
+router.delete('/:id', deletePendingOrder);
 
 export default router;

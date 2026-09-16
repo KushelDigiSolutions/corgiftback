@@ -252,7 +252,14 @@ export const getOrders = async (req, res, next) => {
     if (req.user.role === 'admin') {
       orders = await Order.find().populate('user', 'name email').populate('items.product', 'images sku colorImages').sort({ createdAt: -1 });
     } else {
-      orders = await Order.find({ user: req.user._id }).populate('items.product', 'images sku colorImages').sort({ createdAt: -1 });
+      // Regular customers only see confirmed orders: Cash on Delivery or paid online orders
+      orders = await Order.find({
+        user: req.user._id,
+        $or: [
+          { paymentMethod: 'COD' },
+          { paymentStatus: 'paid' }
+        ]
+      }).populate('items.product', 'images sku colorImages').sort({ createdAt: -1 });
     }
     res.status(200).json({ success: true, data: orders });
   } catch (error) {
@@ -851,6 +858,31 @@ export const cancelOrder = async (req, res, next) => {
     }
 
     res.status(200).json({ success: true, message: 'Order cancelled successfully', data: order });
+  } catch (error) {
+    next(error);
+  }
+};
+
+
+// Discard unconfirmed pending online order (User cancels payment or dismisses gateway)
+export const deletePendingOrder = async (req, res, next) => {
+  try {
+    const order = await Order.findById(req.params.id);
+    if (!order) {
+      return res.status(404).json({ success: false, message: 'Order not found' });
+    }
+
+    if (order.user.toString() !== req.user._id.toString() && req.user.role !== 'admin') {
+      return res.status(403).json({ success: false, message: 'Not authorized to discard this order' });
+    }
+
+    // Only allow discarding unconfirmed pending orders where stock was NOT deducted
+    if (order.paymentStatus === 'pending' && order.orderStatus === 'pending' && !order.stockDeducted) {
+      await Order.findByIdAndDelete(req.params.id);
+      return res.status(200).json({ success: true, message: 'Pending unconfirmed order discarded successfully' });
+    }
+
+    return res.status(400).json({ success: false, message: 'Cannot discard this order as it is already confirmed' });
   } catch (error) {
     next(error);
   }

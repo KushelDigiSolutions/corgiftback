@@ -40,7 +40,9 @@ const __dirname = path.dirname(__filename);
 
 // Middleware
 app.use(cors());
-app.use(express.json());
+app.use(express.json())
+app.use(express.static('public'))
+app.use(express.static(path.join(process.cwd(), 'public')));
 app.use(express.urlencoded({ extended: true }));
 
 if (process.env.NODE_ENV !== "production") {
