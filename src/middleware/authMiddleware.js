@@ -4,7 +4,7 @@ import User from '../models/User.js';
 export const protect = async (req, res, next) => {
   let token;
   if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
-    try {
+    try { 
       token = req.headers.authorization.split(' ')[1];
       const decoded = jwt.verify(token, process.env.JWT_SECRET || 'super_secret_jwt_signature_key_12345');
       req.user = await User.findById(decoded.id).select('-password');
