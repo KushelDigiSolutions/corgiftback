@@ -7,7 +7,8 @@ import {
   getForgotPasswordEmailTemplate,
 } from "../utils/emailTemplates.js";
 
-// Register User
+
+
 export const registerUser = async (req, res, next) => {
   try {
     const { name, email, password, mobile } = req.body;
