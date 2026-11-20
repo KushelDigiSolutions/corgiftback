@@ -10,14 +10,31 @@ import { createDelhiveryOrder } from '../utils/delhivery.js';
 import { deductInventory } from '../utils/inventoryHelper.js';
 
 
-const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID,
-  key_secret: process.env.RAZORPAY_KEY_SECRET,
-});
+const getRazorpayInstance = () => {
+  const key_id = process.env.RAZORPAY_KEY_ID;
+  const key_secret = process.env.RAZORPAY_KEY_SECRET;
+
+  if (!key_id || !key_secret) {
+    return null;
+  }
+
+  return new Razorpay({
+    key_id,
+    key_secret,
+  });
+};
 
 // Initiate real Razorpay Payment Gateway transaction
 export const initiatePayment = async (req, res, next) => {
   try {
+    const razorpay = getRazorpayInstance();
+    if (!razorpay) {
+      return res.status(500).json({
+        success: false,
+        message: 'Razorpay credentials are not configured. Please set RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET in your .env file.'
+      });
+    }
+
     const { orderId } = req.body;
     const order = await Order.findById(orderId);
 
@@ -64,6 +81,13 @@ export const verifyPayment = async (req, res, next) => {
     const order = await Order.findById(orderId).populate('user', 'name email mobile');
     if (!order) {
       return res.status(404).json({ success: false, message: 'Order not found' });
+    }
+
+    if (!process.env.RAZORPAY_KEY_SECRET) {
+      return res.status(500).json({
+        success: false,
+        message: 'Razorpay secret key is not configured. Please set RAZORPAY_KEY_SECRET in your .env file.'
+      });
     }
 
     // Verify signature
